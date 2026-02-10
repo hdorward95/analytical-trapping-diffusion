@@ -11,7 +11,7 @@ def flux_analytical(C_0=3.1622e18,
     '''
     Compute the flux through the far wall of a permeation barrier. See
     TMAP8 ver-1d example. This is the analytical solution for the flux
-    through time.
+    through time. This function returns the time array and flux array.
     
     :param C_0: The constant dissolved gas concentration at the left
     boundary. (atoms/m^2)
@@ -34,7 +34,7 @@ def flux_analytical(C_0=3.1622e18,
         summand += ((-1)**(i+1))*np.exp(-((i+1)**2)*(t/(2*tau_b_e)))
 
     # Now compute and return the analytical solution for flux.       
-    return ((C_0*D)/l) * (1+2*summand)
+    return t, ((C_0*D)/l) * (1+2*summand)
 
 
 
