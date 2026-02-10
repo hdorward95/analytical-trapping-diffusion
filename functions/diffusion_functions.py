@@ -3,7 +3,9 @@ import numpy as np
 def flux_analytical(C_0=3.1622e18, 
                     D= 1,
                     l = 1,
-                    t = np.linspace(0,1,6),
+                    t_start = 0,
+                    t_end = 1,
+                    t_step = 10,
                     tau_b_e = 0.05,
                     m = 10):
     '''
@@ -16,11 +18,16 @@ def flux_analytical(C_0=3.1622e18,
     :param D: The diffusivity of the dissolved gas in the medium.
     (m^2/s)
     :param l: The length from the left boundary to right boundary. (m)
-    :param t: A 1-d numpy array with times at which to evaluate the 
-    flux at the boundary. (s) 
+    :param t_start: The initial time to report. (s)
+    :param t_end: The final time to report. (s)
+    :param t_step: int. The number of time steps. (-)
     :param tau_b_e: The breakthrough time. (s)
     :param m: Order at which to truncate the (Fourier series?) solution
     '''
+
+    # Create time vector
+    t = np.linspace(t_start,t_end,t_step)
+
     # Calculate the sum over order m.
     summand = np.zeros(np.shape(t))
     for i in range(m):
