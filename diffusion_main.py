@@ -7,8 +7,9 @@ from argparse import ArgumentParser
 # Define the CLI arguments
 def parse_arguments():
     parser = ArgumentParser(
-        description="Compute the analytical solution for flux.")
-    parser.add_argument("-l",
+        description="Compute the analytical solution for flux.",
+        fromfile_prefix_chars='@')      # Specify character in command line to call inputs from a file.
+    parser.add_argument("--l",
                         help='The length from the left boundary to right boundary. (m)',
                         type=float,
                         default=1.0)
