@@ -1,3 +1,7 @@
+'''
+Mathematical functions for calculating analytical solution to diffusion
+problem.
+'''
 import numpy as np
 
 def flux_analytical(C_0=3.1622e18, 

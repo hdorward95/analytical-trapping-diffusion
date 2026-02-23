@@ -2,6 +2,7 @@ from functions.diffusion_functions import (flux_analytical,
                                            breakthrough_analytical,
                                            calc_D_eff,
                                            zeta_function_diffusion)
+from functions.diffusion_utils import (write_output)
 from argparse import ArgumentParser
 
 # Define the CLI arguments
@@ -82,6 +83,22 @@ def parse_arguments():
                         help='Verbose outputs from simulation.',
                         type=bool,
                         default=False)
+    parser.add_argument("--print_output",
+                        help='Print the results to the console?',
+                        type=bool,
+                        default=False)
+    parser.add_argument("--write_csv",
+                        help='Save the results to a csv?',
+                        type=bool,
+                        default=False)
+    parser.add_argument("--suffix",
+                        help='An identifier to append to output filenames',
+                        type=str,
+                        default='')
+    parser.add_argument("--out_path",
+                        help='Output filepath (must end in /)',
+                        type=str,
+                        default='')
     
     return parser.parse_args()
 
@@ -137,12 +154,24 @@ def main():
                         tau_b_e = tau,
                         m = args.m)
 
-    print('Time incrememnts')
-    print(time)
+    # Print outputs to console if requested
+    if args.print_output:
+        print('Time incrememnts')
+        print(time)
 
-    print('Flux at boundary')
-    print(out_flux)
+        print('Flux at boundary')
+        print(out_flux)
+    else:
+        None
 
+    # Write outputs to csv if requested
+    if args.write_csv:
+        write_output(time,
+                     out_flux,
+                     suffix=args.suffix,
+                     out_file_path=args.out_path)
+    else:
+        None
 
 # Execute python programme
 if __name__=="__main__":
